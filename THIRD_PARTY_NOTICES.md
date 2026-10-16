@@ -1,5 +1,9 @@
 # Third-party notices
 
+The root `LICENSE` applies to original application code. The components and
+media below are excluded from that MIT license and retain their respective
+licenses and rights. The Rockchip-derived `postprocess.py` remains Apache-2.0.
+
 ## Precompiled YOLOv8n model
 
 - Distributor: https://huggingface.co/RKNNAI/RK3576-CNN-yolov8n

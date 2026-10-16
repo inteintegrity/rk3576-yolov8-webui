@@ -5,7 +5,7 @@ reComputer RK3576 Dev Kit. Upload an MP4 from a PC, run YOLOv8n on the Rockchip
 NPU, then play, seek, or download an H.264 MP4 with boxes, class labels, confidence
 scores, and FPS overlays.
 
-![Processed test frame](verification/annotated-frame.jpg)
+![Edge Vision WebUI running YOLOv8 object detection on RK3576](docs/images/webui-screenshot.png)
 
 ## Features
 
@@ -98,6 +98,14 @@ See [third-party notices](THIRD_PARTY_NOTICES.md).
 The model's embedded compiler version is 2.4.2 and the existing runtime is 2.3.0.
 RKNN emits a version warning; the documented semantic and full-video tests passed
 on the actual device without replacing the runtime.
+
+## License
+
+Original application code is licensed under the [MIT License](LICENSE).
+Third-party components retain their existing licenses: the bundled YOLOv8n model
+is AGPL-3.0, and the Rockchip example and derived postprocessing are Apache-2.0.
+The MIT license does not replace these licenses or grant rights to the test video
+or other third-party media. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Limits
 
