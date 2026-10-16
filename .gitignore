@@ -1,0 +1,33 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Device runtime state and user uploads/results
+rk3576-webui/data/
+rk3576-webui/server.pid
+rk3576-webui/*.log
+rk3576-webui/probe.json
+rk3576-webui/smoke.json
+rk3576-webui/smoke.jpg
+
+# Local SSH inspection utility; credentials are never committed
+remote.py
+inspect.sh
+
+# Generated video downloads; retain the explicitly authorized source test clip
+verification/*.mp4
+video/*
+!video/test.mp4
+
+# Editor / platform files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

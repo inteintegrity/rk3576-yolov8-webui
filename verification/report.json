@@ -1,0 +1,90 @@
+{
+  "health": {
+    "ready": true,
+    "device": "RK3576",
+    "model": "YOLOv8n INT8",
+    "backend": "RKNNLite / NPU",
+    "busy": false,
+    "free_gb": 4.31,
+    "max_upload_mb": 500,
+    "runtime": "2.3.0",
+    "toolkit_lite": "2.3.2",
+    "model_version_warning": "Model compiler 2.4.2; tested on existing runtime 2.3.0"
+  },
+  "invalid.mp4": {
+    "status": 400,
+    "body": {
+      "error": "The file is not a valid MP4 container"
+    }
+  },
+  "wrong.txt": {
+    "status": 400,
+    "body": {
+      "error": "Choose an MP4 video"
+    }
+  },
+  "range_headers": {
+    "Server": "EdgeVision/1.0 Python/3.11.2",
+    "Date": "Thu, 15 Oct 2026 08:58:49 GMT",
+    "Content-Type": "video/mp4",
+    "Accept-Ranges": "bytes",
+    "Content-Length": "1024",
+    "Cache-Control": "no-cache",
+    "Content-Range": "bytes 0-1023/9493964"
+  },
+  "job": {
+    "id": "fbdec22603a747d592bef40f318cf922",
+    "name": "test.mp4",
+    "status": "completed",
+    "message": "Your detection video is ready",
+    "created_at": 1792054660.6395805,
+    "input_bytes": 40969525,
+    "confidence": 0.25,
+    "iou": 0.45,
+    "progress": 100,
+    "frames": 394,
+    "detections": 7769,
+    "classes": {
+      "car": 7374,
+      "bus": 305,
+      "truck": 86,
+      "traffic light": 4
+    },
+    "total_frames": 394,
+    "source_fps": 29.97002997002997,
+    "width": 1280,
+    "height": 720,
+    "source_width": 3840,
+    "source_height": 2160,
+    "backend": "RKNNLite / RK3576 NPU",
+    "npu_fps": 37.63,
+    "processing_fps": 7.89,
+    "elapsed_seconds": 49.92,
+    "frames_with_detections": 394,
+    "output_bytes": 9493964,
+    "completed_at": 1792054714.3436115,
+    "duration_seconds": 13.146,
+    "audio": "Output video is silent"
+  },
+  "download_bytes": 9493964,
+  "download_sha256": "b735f2c76851c4f808f8799c66c88e40eff5b4c6653e42195a18aa396e220858",
+  "checks": [
+    "browser MP4 upload",
+    "all-frame NPU processing",
+    "H264 MP4 output",
+    "range seeking",
+    "suffix ranges",
+    "invalid range rejection",
+    "complete download",
+    "all downloaded frames decoded on PC"
+  ],
+  "download_decoded_frames": 394,
+  "browser_playback": {
+    "duration": 13.14648,
+    "width": 1280,
+    "height": 720,
+    "readyState": 4,
+    "error": null,
+    "playback_confirmed": true
+  }
+}

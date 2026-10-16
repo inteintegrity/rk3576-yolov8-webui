@@ -1,0 +1,7 @@
+{
+  "repository": "https://huggingface.co/RKNNAI/RK3576-CNN-yolov8n",
+  "revision": "5062767692fac53f9d69125abf8edf9d891bff4e",
+  "url": "https://huggingface.co/RKNNAI/RK3576-CNN-yolov8n/resolve/5062767692fac53f9d69125abf8edf9d891bff4e/yolov8n-640x640-w8a8-1/yolov8n.rknn",
+  "sha256": "dcd13f14741074625ffbedd7829eaceede3d3faab6cd6a333be616829ac2d197",
+  "download_only": true
+}

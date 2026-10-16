@@ -1,0 +1,30 @@
+{
+  "passed": [
+    "busy rejection",
+    "active deletion protection",
+    "NPU worker cancellation",
+    "test run cleanup"
+  ],
+  "cancelled_status": {
+    "id": "41b14c722ea541ff808bca7a3312cadf",
+    "name": "lifecycle-test.mp4",
+    "status": "cancelled",
+    "message": "Processing cancelled",
+    "created_at": 1792054790.5388691,
+    "input_bytes": 9493964,
+    "confidence": 0.25,
+    "iou": 0.45,
+    "progress": 0,
+    "frames": 0,
+    "detections": 0,
+    "classes": {},
+    "total_frames": 394,
+    "source_fps": 29.97,
+    "width": 1280,
+    "height": 720,
+    "source_width": 1280,
+    "source_height": 720,
+    "backend": "RKNNLite / RK3576 NPU",
+    "completed_at": 1792054793.7646422
+  }
+}
