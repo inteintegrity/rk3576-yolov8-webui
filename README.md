@@ -1,13 +1,158 @@
-# RK3576 YOLOv8 WebUI
+# Build an Edge AI App with Codex on reComputer RK3576
 
-An English video object detection WebUI running directly on the Seeed Studio
-reComputer RK3576 Dev Kit. Upload an MP4 from a PC, run YOLOv8n on the Rockchip
-NPU, then play, seek, or download an H.264 MP4 with boxes, class labels, confidence
-scores, and FPS overlays.
+Learn how to use **Codex to build, deploy, and test an application on the Seeed
+Studio reComputer RK3576 Dev Kit**, starting with a natural-language request and
+an SSH connection to the board.
+
+This hands-on walkthrough uses a YOLOv8 video detection WebUI as the example.
+You define the goal and hardware constraints; Codex inspects the device, writes
+the application, reuses the installed NPU dependencies, deploys over SSH, and
+tests the result on real hardware. The repository contains the resulting app,
+reusable prompts, a test video, and verification reports so you can follow the
+workflow and check its outcome.
 
 ![Edge Vision WebUI running YOLOv8 object detection on RK3576](docs/images/webui-screenshot.png)
 
-## Features
+## What you will learn
+
+- Give Codex a concrete application goal, device context, and acceptance criteria
+- Connect your development PC to an RK3576 board over SSH and inspect its setup
+- Ask Codex to reuse an existing RKNN environment and find a precompiled model
+- Build a browser interface around an application running on the board's NPU
+- Deploy, test, and fix the complete workflow using actual device results
+- Package the working project, screenshots, and documentation for GitHub
+
+The development flow in this example is:
+
+```text
+Your requirements → Codex on your PC → SSH → reComputer RK3576
+                                              ↓
+PC browser ← MP4 upload / annotated result ← YOLOv8n on the NPU
+```
+
+Codex assists with development on the PC. The deployed detection application
+runs on the board, and its model inference runs on the RK3576 NPU. This app does
+not call an OpenAI API to perform object detection.
+
+## Before you start
+
+- A reComputer RK3576 Dev Kit running Linux with a working NPU driver and RKNN
+  Runtime. This example starts from an existing environment, rather than flashing
+  the board or installing drivers.
+- A development PC with Codex, access to a local project folder, and an SSH
+  client or library available to its shell tools.
+- Network access from the PC to the board and permission for Codex to run the
+  required SSH commands. Use your own board IP and account.
+- An MP4 test video. This repository includes [`video/test.mp4`](video/test.mp4).
+
+Open this project folder in Codex on your PC. You can either study and deploy
+the included implementation or use the prompts below to build your own version.
+These are reusable prompts based on this project's workflow; the generated
+implementation and performance can vary with your environment.
+
+## Walkthrough: build the application with Codex
+
+### 1. Connect and inspect before making changes
+
+Start by giving Codex the board's connection details and requesting a read-only
+inspection. Use an SSH key where available, or supply credentials for your own
+device in the session without saving them in repository files.
+
+```text
+Connect to my reComputer RK3576 via SSH.
+
+Host: <DEVICE_IP>
+Username: <DEVICE_USER>
+Use my SSH key, or ask me for the connection credentials you need.
+
+Run read-only checks of the OS, CPU architecture, available memory and storage,
+RKNN Runtime, Python environments, NPU driver and device access, and existing
+YOLO models. Verify that remote commands execute successfully.
+
+Do not install packages or modify system configurations yet.
+Report the environment status and anything that could block deployment.
+```
+
+Review the report before continuing. In this project, the inspection identified
+Debian 12 ARM64, an accessible RKNPU device, existing RKNNLite and OpenCV
+dependencies, and limited root storage. Those findings shaped the implementation.
+
+### 2. Describe the application and define completion
+
+Give Codex the user experience, hardware requirements, and a testable outcome
+in the same request:
+
+```text
+Build and deploy a YOLOv8 object detection WebUI on my reComputer RK3576 via SSH.
+
+Download a precompiled RK3576-compatible YOLOv8n .rknn model from Rockchip's
+official resources or a verified source. Record the source and verify the
+published checksum. Do not convert or train models.
+
+Use the RK3576 NPU for inference. Create a modern English WebUI where I can
+upload an MP4 from my PC, run detection, and play or download the processed
+video with bounding boxes, class labels, confidence scores, and FPS.
+
+Reuse existing RKNN dependencies and official examples whenever possible.
+Keep application files in a dedicated directory. Do not reinstall drivers or
+modify system configurations without permission.
+
+Test the complete workflow on the actual board, fix errors, and provide the
+working WebUI URL, measured performance, and any remaining limitations.
+```
+
+In this run, Codex reused RKNNLite, adapted Rockchip's YOLOv8 postprocessing,
+and built the web server using Python's standard library. The precompiled model
+was downloaded and checksum-verified. A bus/person image test checked semantic
+detections before moving on to video processing.
+
+### 3. Verify the whole application on the board
+
+Use the browser on your PC to upload `video/test.mp4`, run detection, and inspect
+the result. A page that loads is only one part of the test. Ask Codex to verify
+the entire path and provide evidence:
+
+```text
+Verify the deployed application end to end using video/test.mp4.
+
+Check PC upload, NPU inference, progress updates, bounding boxes and class labels,
+browser video playback, seeking, and downloading the processed MP4 back to the
+PC. Confirm that all frames of the downloaded video decode successfully.
+
+Also check invalid uploads, busy-device handling, cancellation, and storage
+cleanup using disposable test runs. Fix any errors and rerun the affected checks.
+
+Report NPU inference FPS separately from full video processing FPS. Save the
+test results and document limitations and any runtime compatibility warnings.
+```
+
+The original build was tested with all 394 frames of the included 4K clip.
+See [actual-device verification](#actual-device-verification) for measured results
+and links to the saved reports. Review Codex's changes and verify the output
+yourself before relying on a new deployment.
+
+### 4. Refine and share the working project
+
+After the application works, use follow-up requests to improve its presentation
+or package it for others:
+
+```text
+Prepare this project for GitHub. Include the source code, model provenance,
+licenses, deployment instructions, test reports, and the test video I authorize
+you to upload. Exclude credentials, device logs, and user upload directories.
+
+Add my WebUI screenshot to the README and explain how to reproduce this
+Codex-assisted development workflow on another reComputer RK3576.
+```
+
+This sequence gives Codex device context, a bounded implementation task, and a
+clear way to check completion. For more prompting guidance, see OpenAI's
+[Codex best practices](https://learn.chatgpt.com/guides/best-practices).
+
+## The example application
+
+The resulting English WebUI lets you upload an MP4 from your PC, run object
+detection on the board, and play or download an annotated H.264 MP4. It includes:
 
 - Real RK3576 NPU inference using the existing RKNNLite installation
 - Precompiled YOLOv8n INT8 model; no conversion or training
